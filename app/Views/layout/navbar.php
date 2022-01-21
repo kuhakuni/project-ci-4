@@ -8,23 +8,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if (uri_string() == "pages") {
-                    	echo "active";
-                    } ?>" href="/pages">Home</a>
+                    <a class="nav-link" href="/pages">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if (
-                    	uri_string() == "pages/about"
-                    ) {
-                    	echo "active";
-                    } ?>" href="/pages/about">About</a>
+                    <a class="nav-link" href="/pages/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if (
-                    	uri_string() == "pages/contact"
-                    ) {
-                    	echo "active";
-                    } ?>" href="/pages/contact">Contact</a>
+                    <a class="nav-link" href="/pages/contact">Contact</a>
                 </li>
             </ul>
         </div>
