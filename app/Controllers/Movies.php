@@ -22,4 +22,13 @@ class Movies extends BaseController
 
 		return view("movies/index", $data);
 	}
+	public function detail($slug = "null")
+	{
+		$movieDetail = $this->moviesModel->findBySlug($slug);
+		$data = [
+			"title" => $movieDetail["JUDUL"] . " | Project CI4",
+			"movie" => $movieDetail,
+		];
+		return view("movies/detail", $data);
+	}
 }
