@@ -36,4 +36,42 @@ $(document).ready(() => {
 		});
 	});
 	$("#movie-table").DataTable();
+	$("#insertData").submit(function (event) {
+		event.preventDefault();
+		let form = $(this);
+		let url = form.attr("action");
+		let data = form.serialize();
+		$.ajax({
+			method: "POST",
+			url: url,
+			data: data,
+			dataType: "JSON",
+			success: (response) => {
+				if (response.status == true) {
+					Swal.fire({
+						title: "Success!",
+						text: "Data has been added",
+						icon: "success",
+					}).then((result) => {
+						if (result.value) {
+							window.location.href = "/movies";
+						}
+					});
+				} else {
+					Swal.fire({
+						title: "Failed!",
+						text: "Data failed to add",
+						icon: "error",
+					});
+				}
+			},
+			error: (response) => {
+				Swal.fire({
+					title: "Failed!",
+					text: "Data failed to add",
+					icon: "error",
+				});
+			},
+		});
+	});
 });
