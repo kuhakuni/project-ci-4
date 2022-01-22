@@ -8,9 +8,17 @@ class MoviesModel extends Model
 {
 	protected $table = "movies";
 	protected $primaryKey = "ID";
-	protected $useTimeStamps = true;
+	protected $useTimestamps = true;
 	protected $createdField = "CREATED_AT";
 	protected $updatedField = "UPDATED_AT";
+	protected $allowedFields = [
+		"JUDUL",
+		"TAHUN",
+		"PENERBIT",
+		"SUTRADARA",
+		"IMAGE",
+		"SLUG",
+	];
 
 	public function findBySlug($slug)
 	{
