@@ -20,7 +20,9 @@
                 <th scope="row"><?= $movie["ID"] ?></th>
                 <td><?= $movie["JUDUL"] ?></td>
                 <td><?= $movie["TAHUN"] ?></td>
-                <td><a href="#" class="btn btn-success">Detail</a></td>
+                <td><a href="/movies/<?= $movie[
+                	"SLUG"
+                ] ?>" class="btn btn-success">Detail</a></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
