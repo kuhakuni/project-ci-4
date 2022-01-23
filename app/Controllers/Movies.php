@@ -40,11 +40,27 @@ class Movies extends BaseController
 	{
 		$data = [
 			"title" => "Add Movies | Project CI4",
+			"validation" => \Config\Services::validation(),
 		];
 		return view("movies/create", $data);
 	}
 	public function save()
 	{
+		if (
+			!$this->validate([
+				"judul" => "required|is_unique[movies.judul]",
+				"tahun" => "required|numeric|less_than_equal_to[2022]",
+				"sutradara" => "required",
+				"penerbit" => "required",
+				"poster" => "required",
+			])
+		) {
+			$validation = \Config\Services::validation();
+			$data = $validation->getErrors();
+			$data["status"] = false;
+			echo json_encode($data);
+			return;
+		}
 		$dataForm = $this->request->getVar();
 		$result = $this->moviesModel->save([
 			"JUDUL" => $dataForm["judul"],

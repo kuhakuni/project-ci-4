@@ -58,11 +58,41 @@ $(document).ready(() => {
 						}
 					});
 				} else {
-					Swal.fire({
-						title: "Failed!",
-						text: "Data failed to add",
-						icon: "error",
-					});
+					if (response.judul) {
+						$("#judulFilm").addClass("is-invalid");
+						$("#judulFilm").next().html(response.judul);
+					} else {
+						$("#judulFilm").removeClass("is-invalid");
+						$("#judulFilm").next().html("");
+					}
+					if (response.tahun) {
+						$("#tahun").addClass("is-invalid");
+						$("#tahun").next().html(response.tahun);
+					} else {
+						$("#tahun").removeClass("is-invalid");
+						$("#tahun").next().html("");
+					}
+					if (response.sutradara) {
+						$("#sutradara").addClass("is-invalid");
+						$("#sutradara").next().html(response.sutradara);
+					} else {
+						$("#sutradara").removeClass("is-invalid");
+						$("#sutradara").next().html("");
+					}
+					if (response.penerbit) {
+						$("#penerbit").addClass("is-invalid");
+						$("#penerbit").next().html(response.penerbit);
+					} else {
+						$("#penerbit").removeClass("is-invalid");
+						$("#penerbit").next().html("");
+					}
+					if (response.poster) {
+						$("#poster").addClass("is-invalid");
+						$("#poster").next().html(response.poster);
+					} else {
+						$("#poster").removeClass("is-invalid");
+						$("#poster").next().html("");
+					}
 				}
 			},
 			error: (response) => {
