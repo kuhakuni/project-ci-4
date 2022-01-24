@@ -18,7 +18,7 @@
             <div class="row mb-3">
                 <label for="tahun" class="col-sm-2 col-form-label">Tahun Rilis</label>
                 <div class="col-sm-10">
-                    <input type="number" min="0" max="2022" class="form-control" id="tahun" name="tahun">
+                    <input type="number" class="form-control" id="tahun" name="tahun">
                     <div id="validation-tahun" class="invalid-feedback"></div>
                 </div>
             </div>

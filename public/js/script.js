@@ -50,7 +50,7 @@ $(document).ready(() => {
 				if (response.status == true) {
 					Swal.fire({
 						title: "Success!",
-						text: "Data has been added",
+						text: response.message,
 						icon: "success",
 					}).then((result) => {
 						if (result.value) {
@@ -102,6 +102,46 @@ $(document).ready(() => {
 					icon: "error",
 				});
 			},
+		});
+	});
+	$("#deleteData").submit(function (event) {
+		event.preventDefault();
+		let form = $(this);
+		let url = form.attr("action");
+		let data = form.serialize();
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					method: "POST",
+					url: url,
+					data: data,
+					dataType: "JSON",
+					success: (response) => {
+						if (response.status == true) {
+							Swal.fire({
+								title: "Success!",
+								text: response.message,
+								icon: "success",
+							}).then((result) => {
+								if (result.value) {
+									window.location.href = "/movies";
+								}
+							});
+						} else {
+							Swal.fire({
+								title: "Failed!",
+								text: "Data failed to delete",
+								icon: "error",
+							});
+						}
+					},
+				});
+			}
 		});
 	});
 });

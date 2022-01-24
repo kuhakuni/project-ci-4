@@ -46,20 +46,53 @@ class Movies extends BaseController
 	}
 	public function save()
 	{
-		if (
-			!$this->validate([
-				"judul" => "required|is_unique[movies.judul]",
-				"tahun" => "required|numeric|less_than_equal_to[2022]",
-				"sutradara" => "required",
-				"penerbit" => "required",
-				"poster" => "required",
-			])
-		) {
+		$valid = $this->validate([
+			"judul" => [
+				"label" => "Judul",
+				"rules" => "required|is_unique[movies.judul]",
+				"errors" => [
+					"required" => "{field} tidak boleh kosong",
+					"is_unique" => "{field} film sudah ada",
+				],
+			],
+			"tahun" => [
+				"label" => "Tahun",
+				"rules" => "required|numeric|less_than_equal_to[2022]",
+				"errors" => [
+					"required" => "Tahun tidak boleh kosong",
+					"numeric" => "Tahun harus berupa angka",
+					"less_than_equal_to" =>
+						"Tahun harus kurang dari atau sama dengan 2022",
+				],
+			],
+			"penerbit" => [
+				"label" => "Penerbit",
+				"rules" => "required",
+				"errors" => [
+					"required" => "Penerbit tidak boleh kosong",
+				],
+			],
+			"sutradara" => [
+				"label" => "Sutradara",
+				"rules" => "required",
+				"errors" => [
+					"required" => "Sutradara tidak boleh kosong",
+				],
+			],
+			"poster" => [
+				"label" => "Poster",
+				"rules" => "required",
+				"errors" => [
+					"required" => "Poster tidak boleh kosong",
+				],
+			],
+		]);
+		if (!$valid) {
 			$validation = \Config\Services::validation();
 			$data = $validation->getErrors();
 			$data["status"] = false;
 			echo json_encode($data);
-			return;
+			exit();
 		}
 		$dataForm = $this->request->getVar();
 		$result = $this->moviesModel->save([
@@ -76,5 +109,13 @@ class Movies extends BaseController
 				"message" => "Data berhasil disimpan",
 			]);
 		}
+	}
+	public function delete($id)
+	{
+		$this->moviesModel->delete($id);
+		echo json_encode([
+			"status" => true,
+			"message" => "Data berhasil dihapus",
+		]);
 	}
 }

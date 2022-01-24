@@ -21,9 +21,15 @@
                             <p class="card-text">Distributed by <span class="fw-bold"><?= $movie[
                             	"PENERBIT"
                             ] ?></span></p>
-
-                            <a href="#" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="bi bi-trash-fill text-dark"></i></a>
+                            <form action="/movies/<?= $movie[
+                            	"ID"
+                            ] ?>" method="POST" id="deleteData">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <a href="#" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                <button type="submit" class="btn btn-danger"><i
+                                        class="bi bi-trash-fill text-dark"></i></button>
+                            </form>
 
                             <div class="mt-5">
                                 <a href="/movies" class="">Kembali</a>
